@@ -1,0 +1,43 @@
+{
+  "name": "wcs-wrapper",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "tsx --watch --env-file .env.development src/server.ts",
+    "dev:staging": "tsx --watch --env-file .env.staging src/server.ts",
+    "dev:prod": "tsx --watch --env-file .env.production src/server.ts",
+    "start": "node --env-file .env dist/server.js",
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "express": "^5.1.0",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "@tsconfig/node22": "^22.0.2",
+    "@types/express": "^5.0.3",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.5.1",
+    "eslint": "^9.35.0",
+    "eslint-plugin-perfectionist": "^4.15.0",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.44.0"
+  },
+  "imports": {
+    "#*": "./src/*"
+  }
+}
