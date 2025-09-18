@@ -6,6 +6,7 @@
     "dev": "tsx --watch --env-file .env.development src/server.ts",
     "dev:staging": "tsx --watch --env-file .env.staging src/server.ts",
     "dev:prod": "tsx --watch --env-file .env.production src/server.ts",
+    "dummy:wcs": "tsx src/dummy/dummy_server.ts",
     "start": "node --env-file .env dist/server.js",
     "build": "tsc",
     "type-check": "tsc --noEmit",
