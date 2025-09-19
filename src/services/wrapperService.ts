@@ -5,7 +5,7 @@ import axios from "axios";
 import { ZodError } from "zod";
 
 export const WcsService = async (storeId: string, productId: string): Promise<ProductAttributesPayload> => {
-  const url = `http://localhost:8000/wcs/resources/stores/${storeId}/products/${productId}/attributes`;
+  const url = `https://localhost:8000/wcs/resources/stores/${storeId}/products/${productId}/attributes`;
 
   try {
     const response = await axios.get(url, {

@@ -14,9 +14,9 @@ export interface ProductAttributesPayload {
 }
 
 export const WcsAttributeSchema = z.object({
-  attributeName: z.string().nonempty(),
-  usage: AttributeUsageEnum,
-  value: z.string().nonempty(),
+  AttributeName: z.string().nonempty(),
+  Usage: AttributeUsageEnum,
+  Value: z.string().nonempty(),
 });
 
 export const WcsAttributeListSchema = z.object({
