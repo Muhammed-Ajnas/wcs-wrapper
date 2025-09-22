@@ -15,6 +15,7 @@ export const wcsController = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Service failed:", error);
     return sendResponse(res, 500, {
+      data: undefined,
       message: "WCS service failed",
       status: "error",
     });
