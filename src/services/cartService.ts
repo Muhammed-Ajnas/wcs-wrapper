@@ -8,7 +8,7 @@ const tokenCache = new Map<string, TokenCacheEntry>();
 const cacheKey = (storeId: string, username: string) => `${storeId}:${username}`;
 
 const getTokens = async (storeId: string, creds: LoginCred): Promise<TokenCacheEntry> => {
-  const key = cacheKey(storeId, creds.username);
+  const key = cacheKey(storeId, creds.logonId);
   const tokenCacheEntry = tokenCache.get(key);
   if (tokenCacheEntry != undefined) {
     return tokenCacheEntry;
@@ -33,7 +33,7 @@ const loginIdentity = async (storeId: string, creds: LoginCred): Promise<TokenCa
     }
 
     const entry: TokenCacheEntry = { wcToken, wcTrustedToken };
-    tokenCache.set(cacheKey(storeId, creds.username), entry);
+    tokenCache.set(cacheKey(storeId, creds.logonId), entry);
     return entry;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
@@ -78,8 +78,15 @@ export const getCartForUser = async (storeId: string, creds: LoginCred): Promise
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       if (error.response) {
+        const statusCode = error.response.status;
+
+        if (statusCode === 401 || statusCode === 403) {
+          tokenCache.delete(cacheKey(storeId, creds.logonId));
+          return getCartForUser(storeId, creds);
+        }
+
         const e: HttpError = new Error(`WCS cart error: ${error.message}`);
-        e.status = error.response.status;
+        e.status = statusCode;
         e.upstream = error.response.data;
         throw e;
       }
